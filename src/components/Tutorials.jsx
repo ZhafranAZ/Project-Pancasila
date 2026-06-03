@@ -25,8 +25,11 @@ export const tutorials = [
     title: <>Membuat Bahan Belajar Berupa Video Menggunakan <span className="notebook-sparkle">NotebookLM</span></>,
     description: <>Pelajari cara mengubah materi pelajaran menjadi video edukatif dengan bantuan <span className="notebook-sparkle">NotebookLM</span> secara mudah dan cepat.</>,
     duration: '15 Menit',
+    level: 'Pemula',
     color: 'bg-orange-brand',
     hoverColor: 'hover:bg-orange-brand',
+    hoverShadowClass: 'hover:!shadow-[8px_8px_0px_0px_#f9731680]',
+    bgGradientClass: 'bg-gradient-to-br from-[#f97316]/20 to-transparent',
     iconColor: 'text-black',
     link: 'https://notebooklm.google.com',
     details: {
@@ -51,8 +54,11 @@ export const tutorials = [
     title: <>Membuat Bahan Belajar Berupa Audio Menggunakan <span className="notebook-sparkle">NotebookLM</span></>,
     description: <>Ubah teks atau materi tertulis menjadi ringkasan audio atau format podcast menggunakan fitur <span className="notebook-sparkle">NotebookLM</span>.</>,
     duration: '10 Menit',
+    level: 'Pemula',
     color: 'bg-green-brand',
     hoverColor: 'hover:bg-green-brand',
+    hoverShadowClass: 'hover:!shadow-[8px_8px_0px_0px_#22c55e80]',
+    bgGradientClass: 'bg-gradient-to-br from-[#22c55e]/20 to-transparent',
     iconColor: 'text-white',
     link: 'https://notebooklm.google.com',
     details: {
@@ -77,8 +83,11 @@ export const tutorials = [
     title: <>Membuat Bahan Belajar Berupa Quiz Dan Kartu Tanya Menggunakan <span className="notebook-sparkle">NotebookLM</span></>,
     description: 'Generate soal latihan, quiz interaktif, dan flashcard (kartu tanya) langsung dari dokumen materi belajarmu.',
     duration: '20 Menit',
+    level: 'Pemula',
     color: 'bg-blue-brand',
     hoverColor: 'hover:bg-blue-brand',
+    hoverShadowClass: 'hover:!shadow-[8px_8px_0px_0px_#3b82f680]',
+    bgGradientClass: 'bg-gradient-to-br from-[#3b82f6]/20 to-transparent',
     iconColor: 'text-white',
     link: 'https://notebooklm.google.com',
     details: {
@@ -103,8 +112,11 @@ export const tutorials = [
     title: <>Membuat Kuis Interaktif Menggunakan <span className="gemini-sparkle">Google Gemini</span></>,
     description: <>Gunakan <span className="gemini-sparkle">Google Gemini</span> untuk menyusun kuis interaktif yang seru, lengkap dengan pembahasan dan skenario.</>,
     duration: '25 Menit',
+    level: 'Menengah',
     color: 'bg-purple-brand',
     hoverColor: 'hover:bg-purple-brand',
+    hoverShadowClass: 'hover:!shadow-[8px_8px_0px_0px_#a855f780]',
+    bgGradientClass: 'bg-gradient-to-br from-[#a855f7]/20 to-transparent',
     iconColor: 'text-white',
     link: 'https://gemini.google.com',
     details: {
@@ -149,7 +161,7 @@ export default function Tutorials({ darkMode }) {
   }
 
   return (
-    <section id="tutorials" className={`py-20 md:py-28 bg-grid relative ${darkMode ? '' : 'bg-gray-50'}`}>
+    <section id="tutorials" className={`scroll-mt-20 md:scroll-mt-28 py-20 md:py-28 bg-grid relative ${darkMode ? '' : 'bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Section header */}
         <motion.div
@@ -201,13 +213,21 @@ export default function Tutorials({ darkMode }) {
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`neo-card p-6 md:p-8 flex flex-col group relative transition-transform hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_#000] cursor-pointer`}
+                className={`neo-card p-6 md:p-8 flex flex-col group relative overflow-hidden transition-all duration-300 hover:-translate-y-2 ${tutorial.hoverShadowClass || 'hover:!shadow-[8px_8px_0px_0px_#000]'} cursor-pointer z-10`}
                 onClick={() => navigate(`/tutorial/${tutorial.slug}`)}
               >
+                {/* Gradient Background */}
+                <div className={`absolute inset-0 -z-20 ${tutorial.bgGradientClass}`}></div>
+                
+                {/* Number Watermark */}
+                <div className={`absolute -top-4 right-2 text-[120px] font-black -z-10 select-none leading-none opacity-[0.05] ${darkMode ? 'text-white' : 'text-black'}`}>
+                  0{index + 1}
+                </div>
+
                 {/* Header: Icon */}
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center gap-4">
-                    <div className={`w-14 h-14 rounded-xl border-3 flex items-center justify-center transition-transform group-hover:rotate-6 ${
+                    <div className={`w-14 h-14 rounded-xl border-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12 ${
                       tutorial.color
                     } ${darkMode ? 'border-white/30' : 'border-black shadow-[3px_3px_0px_0px_#000]'}`}>
                       <tutorial.icon size={28} className={tutorial.iconColor} />
@@ -222,25 +242,38 @@ export default function Tutorials({ darkMode }) {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-heading font-bold mb-3 pr-8">
+                <h3 className="text-xl font-heading font-bold mb-3 pr-8 relative z-10">
                   {tutorial.title}
                 </h3>
-                <p className={`leading-relaxed mb-8 flex-1 ${
-                  darkMode ? 'text-gray-300' : 'text-gray-600'
+                
+                {/* Pill Badges */}
+                <div className="flex flex-wrap gap-2 mb-4 relative z-10">
+                  <span className={`px-2.5 py-1 text-xs font-bold rounded-md border-2 ${darkMode ? 'bg-dark-surface text-gray-300 border-white/20' : 'bg-white text-gray-700 border-black shadow-[1px_1px_0px_0px_#000]'}`}>
+                    ⏳ {tutorial.duration}
+                  </span>
+                  <span className={`px-2.5 py-1 text-xs font-bold rounded-md border-2 ${darkMode ? 'bg-dark-surface text-gray-300 border-white/20' : 'bg-white text-gray-700 border-black shadow-[1px_1px_0px_0px_#000]'}`}>
+                    📊 Tingkat: {tutorial.level}
+                  </span>
+                </div>
+
+                <p className={`leading-relaxed mb-6 flex-1 relative z-10 ${
+                  darkMode ? 'text-gray-300' : 'text-gray-700 font-medium'
                 }`}>
                   {tutorial.description}
                 </p>
 
-                {/* CTA Button */}
-                <button
-                  className={`neo-btn px-5 py-3 text-sm justify-center w-full mt-auto transition-colors duration-300 ${
-                    darkMode
-                      ? `bg-white text-black border-white/30 ${tutorial.hoverColor}`
-                      : `bg-white text-black ${tutorial.hoverColor}`
-                  }`}
-                >
-                  Pelajari Modul <ArrowRight size={16} />
-                </button>
+                {/* Divider & CTA Button */}
+                <div className={`mt-auto pt-6 border-t-2 border-dashed relative z-10 ${darkMode ? 'border-white/20' : 'border-gray-300'}`}>
+                  <button
+                    className={`neo-btn px-5 py-3 text-sm justify-center w-full transition-all duration-300 group-hover:gap-3 ${
+                      darkMode
+                        ? `bg-white text-black border-white/30 ${tutorial.hoverColor}`
+                        : `bg-white text-black ${tutorial.hoverColor}`
+                    }`}
+                  >
+                    Pelajari Modul <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  </button>
+                </div>
               </motion.div>
             )
           })}

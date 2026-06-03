@@ -58,7 +58,7 @@ export default function AITools({ darkMode }) {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="tools" className="py-20 md:py-28 bg-grid">
+    <section id="tools" className={`py-20 md:py-28 bg-dots ${darkMode ? '' : 'bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Section header */}
         <motion.div

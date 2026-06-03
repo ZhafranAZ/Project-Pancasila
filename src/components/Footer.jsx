@@ -43,15 +43,23 @@ export default function Footer({ darkMode }) {
                 { label: 'Beranda', href: '#hero' },
                 { label: 'Kenapa AI?', href: '#why-ai' },
                 { label: 'Tutorial', href: '#tutorials' },
-                { label: 'Prompt Library', href: '#prompts' },
+                { label: 'Prompt Labs', href: '/prompt-lab' },
                 { label: 'AI Tools', href: '#tools' },
+                { label: 'FAQ', href: '#faq' },
               ].map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => {
-                      e.preventDefault()
-                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' })
+                      if (link.href.startsWith('#')) {
+                        e.preventDefault()
+                        const el = document.querySelector(link.href)
+                        if (el) {
+                          el.scrollIntoView({ behavior: 'smooth' })
+                        } else {
+                          window.location.href = '/' + link.href
+                        }
+                      }
                     }}
                     className="text-gray-400 hover:text-yellow-brand transition-colors"
                   >

@@ -1,43 +1,55 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { ChevronDown, Mail } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 
 const faqs = [
   {
     question: "Apa itu LearnWithAI?",
-    answer: "LearnWithAI adalah platform pembelajaran yang membantu pengguna mempelajari dan memanfaatkan berbagai tools AI melalui tutorial, modul belajar, dan panduan praktis."
+    answer: "LearnWithAI adalah platform pembelajaran yang membantu pelajar, mahasiswa, dan pengajar mengubah cara mereka belajar menjadi lebih interaktif. Kami mengajarkan cara menyulap AI (seperti Gemini & NotebookLM) menjadi asisten dan tutor belajar pribadi."
   },
   {
     question: "Apakah LearnWithAI gratis?",
-    answer: "Ya, seluruh materi dan tutorial dapat diakses secara gratis kecuali terdapat informasi khusus pada modul tertentu."
+    answer: "Ya, 100% gratis! Semua tutorial, video, dan fitur Prompt Labs dapat diakses tanpa biaya sepeser pun."
   },
   {
     question: "Siapa yang cocok menggunakan LearnWithAI?",
-    answer: "Mahasiswa, pelajar, dosen, guru, content creator, freelancer, dan siapa saja yang ingin meningkatkan produktivitas menggunakan AI."
+    answer: "Mahasiswa, pelajar, dosen, guru, dan siapa saja yang ingin menggunakan AI secara sehat dan produktif untuk meningkatkan kualitas belajar mengajar."
   },
   {
     question: "Bagaimana cara memulai belajar?",
-    answer: "Pilih menu Tutorial, kemudian pilih modul yang ingin dipelajari sesuai kebutuhan Anda."
+    answer: "Sangat mudah! Kamu bisa langsung mencoba fitur 'Prompt Labs' untuk merasakan pengalaman dibimbing oleh AI, atau buka menu 'Tutorial' untuk menonton panduan langkah demi langkah penggunaan AI."
   },
   {
-    question: "Apakah saya harus mengikuti modul secara berurutan?",
-    answer: "Tidak. Anda dapat mempelajari modul sesuai kebutuhan dan minat Anda."
+    question: "Apa bedanya menggunakan AI biasa dengan menggunakan fitur Prompt Labs di website ini?",
+    answer: "Jika kamu sekadar menggunakan ChatGPT atau Gemini, mereka hanya bertindak sebagai mesin penjawab. Namun, dengan fitur Prompt Labs kami, instruksi (prompt) yang kamu kirimkan telah diracik secara otomatis di balik layar. Hasilnya? AI tidak akan memberikan jawaban instan, melainkan bertindak secara cerdas sebagai 'Tutor Pribadi' atau 'Pembuat Kuis' yang melatih cara berpikirmu!"
   },
   {
-    question: "Apakah saya perlu akun ChatGPT atau Gemini?",
-    answer: "Beberapa tutorial memerlukan akun pada platform AI tertentu seperti ChatGPT, Gemini, Claude, atau NotebookLM."
+    question: "Apakah menggunakan AI akan membuat saya menjadi malas belajar?",
+    answer: "Tidak, jika digunakan dengan benar! Fitur seperti Prompt Labs kami dirancang agar AI bertindak sebagai tutor pribadi (Socratic tutor) yang memancingmu berpikir kritis, bukan sekadar mesin penjawab soal instan. AI di sini adalah teman diskusi, bukan joki tugas."
+  },
+  {
+    question: "Apakah jawaban dari AI selalu 100% benar?",
+    answer: "Tidak. AI terkadang bisa 'berhalusinasi' atau mengarang fakta. Oleh karena itu, platform kami mengajarkan cara membuat instruksi (prompt) yang tepat agar AI menyertakan sumber kredibel. Tetap jadikan AI sebagai pemantik ide awal, dan selalu periksa ulang (cross-check) informasi penting ke buku referensimu!"
+  },
+  {
+    question: "Apakah saya perlu meng-install aplikasi khusus?",
+    answer: "Sama sekali tidak. LearnWithAI berbasis web sepenuhnya (Web-based). Selama kamu memiliki browser dan koneksi internet, kamu bisa langsung belajar tanpa membebani memori HP atau laptopmu."
+  },
+  {
+    question: "Apakah platform ini bisa diakses lewat HP (smartphone)?",
+    answer: "Tentu saja! Website dan fitur Prompt Labs kami dirancang responsif (mobile-friendly). Kamu bisa meracik prompt dan menonton tutorial dengan nyaman langsung dari genggaman tanganmu kapan saja."
+  },
+  {
+    question: "Berapa lama waktu yang dibutuhkan untuk menyelesaikan satu tutorial?",
+    answer: "Sebagian besar tutorial kami dirancang singkat dan padat (bite-sized), rata-rata hanya memakan waktu 5-10 menit untuk dipahami dan dipraktekkan, sehingga tidak akan menyita waktu belajar utamamu."
   },
   {
     question: "Apakah tool AI yang digunakan berbayar?",
-    answer: "Tidak semuanya. Banyak tutorial menggunakan versi gratis dari tool AI yang tersedia."
+    answer: "Semua materi yang kami ajarkan berfokus pada penggunaan tool AI versi gratis (seperti Google Gemini dan NotebookLM) sehingga ramah di kantong pelajar."
   },
   {
-    question: "Apakah saya harus memiliki kemampuan coding?",
-    answer: "Tidak. Sebagian besar tutorial dirancang untuk pemula tanpa latar belakang pemrograman."
-  },
-  {
-    question: "Bagaimana jika saya mengalami kendala saat mengikuti tutorial?",
-    answer: "Anda dapat menghubungi tim melalui halaman kontak atau media sosial yang tersedia."
+    question: "Apakah saya perlu membuat akun untuk menggunakan AI tersebut?",
+    answer: "Ya. Beberapa tutorial dan fitur AI (seperti Google Gemini atau NotebookLM) mewajibkanmu masuk menggunakan akun Google (Gmail) yang sudah kamu miliki."
   }
 ]
 
@@ -131,34 +143,6 @@ export default function FAQ({ darkMode }) {
             )
           })}
         </div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className={`mt-16 max-w-[900px] mx-auto text-center p-8 md:p-10 rounded-2xl neo-card ${
-            darkMode ? 'bg-dark-card' : 'bg-yellow-light'
-          }`}
-        >
-          <h3 className="text-2xl md:text-3xl font-heading font-bold mb-3">
-            Masih punya pertanyaan?
-          </h3>
-          <p className={`mb-8 text-lg ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-            Hubungi kami dan kami akan membantu Anda.
-          </p>
-          <a
-            href="https://www.instagram.com/learnwithai.adzkar/"
-            className={`neo-btn px-8 py-3.5 text-lg justify-center transition-colors duration-300 ${
-              darkMode
-                ? 'bg-white text-black border-white/30 hover:bg-gray-200'
-                : 'bg-white text-black hover:bg-blue-brand hover:text-white'
-            }`}
-          >
-            <Mail size={20} />
-            Contact Us
-          </a>
-        </motion.div>
       </div>
     </section>
   )

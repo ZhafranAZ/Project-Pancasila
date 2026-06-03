@@ -11,6 +11,7 @@ import VideoNotebookLM from './pages/tutorials/VideoNotebookLM'
 import AudioNotebookLM from './pages/tutorials/AudioNotebookLM'
 import QuizFlashcardNotebookLM from './pages/tutorials/QuizFlashcardNotebookLM'
 import QuizGemini from './pages/tutorials/QuizGemini'
+import PromptLab from './pages/PromptLab'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -30,9 +31,17 @@ function App() {
     }
     // Set a tiny timeout to ensure DOM has updated after routing
     setTimeout(() => {
+      if (location.hash) {
+        const id = location.hash.replace('#', '')
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'instant' })
+          return
+        }
+      }
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     }, 0)
-  }, [location.pathname])
+  }, [location.pathname, location.hash])
 
   useEffect(() => {
     if (darkMode) {
@@ -59,6 +68,7 @@ function App() {
               <Route path="/tutorial/audio-notebooklm" element={<AudioNotebookLM darkMode={darkMode} />} />
               <Route path="/tutorial/quiz-flashcard-notebooklm" element={<QuizFlashcardNotebookLM darkMode={darkMode} />} />
               <Route path="/tutorial/quiz-gemini" element={<QuizGemini darkMode={darkMode} />} />
+              <Route path="/prompt-lab" element={<PromptLab darkMode={darkMode} />} />
             </Routes>
           </AnimatePresence>
           <Footer darkMode={darkMode} />

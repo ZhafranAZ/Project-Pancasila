@@ -12,8 +12,8 @@ const navLinks = [
   { label: 'Beranda', href: '#hero' },
   { label: 'Kenapa AI?', href: '#why-ai' },
   { label: 'Tutorial', href: '#tutorials' },
-  { label: 'Prompt', href: '#prompts' },
   { label: 'Tools', href: '#tools' },
+  { label: 'FAQ', href: '#faq' },
 ]
 
 export default function Navbar({ darkMode, setDarkMode }) {

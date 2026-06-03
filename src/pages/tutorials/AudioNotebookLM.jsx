@@ -25,7 +25,7 @@ export default function AudioNotebookLM({ darkMode }) {
         origin: { y: 0.6 },
         colors: ['#FFD93D', '#4D96FF', '#6BCB77', '#FF78C4', '#A855F7']
       })
-      localStorage.setItem('tutorial_audio_notebooklm_completed', 'true')
+      localStorage.setItem('tutorial_audio-notebooklm_completed', 'true')
     }
   }, [isEndInView])
 
@@ -51,14 +51,14 @@ export default function AudioNotebookLM({ darkMode }) {
       <div className={`absolute inset-0 ${
         darkMode 
           ? 'bg-gradient-to-br from-dark via-dark-surface/30 to-dark' 
-          : 'bg-gradient-to-br from-blue-brand/20 via-white to-purple-brand/10'
+          : 'bg-gradient-to-br from-green-brand/20 via-white to-blue-brand/10'
       }`} />
       
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Tombol Kembali */}
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/#tutorials')}
           className={`group flex items-center gap-2 mb-6 md:mb-8 px-4 py-2 rounded-xl font-bold transition-all ${
             darkMode 
               ? 'hover:bg-white/10 text-gray-300 hover:text-white' 
@@ -78,7 +78,7 @@ export default function AudioNotebookLM({ darkMode }) {
           }`}
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
-            <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl border-4 flex items-center justify-center shrink-0 bg-blue-brand text-black shadow-[4px_4px_0px_0px_#000] ${darkMode ? 'border-white/30' : 'border-black'}`}>
+            <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl border-4 flex items-center justify-center shrink-0 bg-green-brand text-white shadow-[4px_4px_0px_0px_#000] ${darkMode ? 'border-white/30' : 'border-black'}`}>
               <Headphones size={32} />
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-heading font-black tracking-tight leading-tight">
