@@ -4,6 +4,7 @@ import WhyLearnAI from '../components/WhyLearnAI'
 import Tutorials from '../components/Tutorials'
 import PromptLibrary from '../components/PromptLibrary'
 import AITools from '../components/AITools'
+import FAQ from '../components/FAQ'
 
 export default function Home({ darkMode }) {
   return (
@@ -18,6 +19,7 @@ export default function Home({ darkMode }) {
       <Tutorials darkMode={darkMode} />
       <PromptLibrary darkMode={darkMode} />
       <AITools darkMode={darkMode} />
+      <FAQ darkMode={darkMode} />
     </motion.main>
   )
 }
