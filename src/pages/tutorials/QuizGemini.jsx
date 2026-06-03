@@ -156,7 +156,7 @@ Halaman akhir setelah semua soal selesai. Tampilkan jumlah jawaban yang benar, t
         
         {/* Back Button */}
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/#tutorials')}
           className={`group flex items-center gap-2 mb-6 md:mb-8 px-4 py-2 rounded-xl font-bold transition-all ${
             darkMode 
               ? 'hover:bg-white/10 text-gray-300 hover:text-white' 

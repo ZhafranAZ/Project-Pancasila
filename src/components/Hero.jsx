@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, BookOpen, Sparkles, Star, Zap, Heart } from 'lucide-react'
+import { ArrowRight, BookOpen, Sparkles, Star, Zap, GraduationCap, Heart } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * Hero - Full screen hero section with floating shapes
  * Features animated title, CTA buttons, and decorative elements
  */
+
+const FreeCircleIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <circle cx="12" cy="12" r="10"></circle>
+    <text x="12" y="14" textAnchor="middle" fontSize="5" fontWeight="bold" stroke="none" fill="currentColor" style={{ fontFamily: 'sans-serif', letterSpacing: '0.5px' }}>FREE</text>
+  </svg>
+)
 
 // Floating decorative shapes
 const FloatingShape = ({ className, delay = 0, children }) => (
@@ -26,6 +34,8 @@ const FloatingShape = ({ className, delay = 0, children }) => (
 )
 
 export default function Hero({ darkMode }) {
+  const navigate = useNavigate()
+  
   const scrollTo = (id) => {
     const el = document.querySelector(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
@@ -180,38 +190,50 @@ export default function Hero({ darkMode }) {
             Mulai Belajar <ArrowRight size={20} />
           </button>
           <button
-            onClick={() => scrollTo('#prompts')}
-            className={`neo-btn px-8 py-4 text-lg ${
+            onClick={() => navigate('/prompt-lab')}
+            className={`neo-btn relative overflow-hidden group px-8 py-4 text-lg ${
               darkMode
                 ? 'bg-blue-brand text-white border-white/30'
                 : 'bg-blue-brand text-white'
             }`}
           >
-            Jelajahi Materi <BookOpen size={20} />
+            <span className="relative z-10 flex items-center justify-center gap-2">Coba Prompt Labs 🧪</span>
+            <motion.div
+              animate={{ left: ['-100%', '200%'] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+              className="absolute top-0 -inset-full h-full w-1/2 z-0 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+            />
           </button>
         </motion.div>
 
-        {/* Stats */}
+        {/* Benefit Badges */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-14"
+          className="grid grid-cols-3 items-stretch justify-center gap-2 md:gap-8 mt-10 md:mt-14 max-w-3xl mx-auto w-full px-2 md:px-0"
         >
           {[
-            { value: '5+', label: 'Tutorial AI' },
-            { value: '10+', label: 'Prompt Siap Pakai' },
-            { value: '4+', label: 'Tools AI' },
-          ].map((stat, i) => (
-            <div key={i} className={`px-6 py-3 rounded-xl border-3 ${
-              darkMode
-                ? 'border-white/15 bg-white/5'
-                : 'border-black/15 bg-white/80'
-            }`}>
-              <div className="text-2xl md:text-3xl font-heading font-bold text-blue-brand">{stat.value}</div>
-              <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{stat.label}</div>
-            </div>
-          ))}
+            { icon: Zap, label: 'Sangat Interaktif' },
+            { icon: GraduationCap, label: 'Bahasa Mudah Dipahami' },
+            { icon: FreeCircleIcon, label: '100% Gratis' },
+          ].map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <div key={i} className={`px-1 py-3 md:px-4 md:py-4 rounded-xl md:rounded-2xl border-2 flex flex-col items-center text-center gap-1 md:gap-2 transition-transform hover:-translate-y-1 ${
+                darkMode
+                  ? 'border-white/10 bg-white/5'
+                  : 'border-gray-200 bg-white'
+              }`}>
+                <div className="mb-0 md:mb-1">
+                  <Icon className="w-6 h-6 md:w-8 md:h-8 text-blue-brand" />
+                </div>
+                <div className={`text-[10px] md:text-sm font-medium leading-tight ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {stat.label}
+                </div>
+              </div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

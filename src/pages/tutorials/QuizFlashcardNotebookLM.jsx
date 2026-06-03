@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import confetti from 'canvas-confetti'
-import { ArrowLeft, ExternalLink, FileText, Play, Sparkles, List as ListIcon, X as XIcon } from 'lucide-react'
+import { ArrowLeft, ExternalLink, FileText, Play, Sparkles, FileQuestion, List as ListIcon, X as XIcon } from 'lucide-react'
 
 export default function QuizFlashcardNotebookLM({ darkMode }) {
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ export default function QuizFlashcardNotebookLM({ darkMode }) {
         origin: { y: 0.6 },
         colors: ['#FFD93D', '#4D96FF', '#6BCB77', '#FF78C4', '#A855F7']
       })
-      localStorage.setItem('tutorial_notebooklm_completed', 'true')
+      localStorage.setItem('tutorial_quiz-flashcard-notebooklm_completed', 'true')
     }
   }, [isEndInView])
 
@@ -51,13 +51,13 @@ export default function QuizFlashcardNotebookLM({ darkMode }) {
       <div className={`absolute inset-0 ${
         darkMode 
           ? 'bg-gradient-to-br from-dark via-dark-surface/30 to-dark' 
-          : 'bg-gradient-to-br from-green-brand/20 via-white to-blue-brand/10'
+          : 'bg-gradient-to-br from-blue-brand/20 via-white to-purple-brand/10'
       }`} />
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back Button */}
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/#tutorials')}
           className={`group flex items-center gap-2 mb-6 md:mb-8 px-4 py-2 rounded-xl font-bold transition-all ${
             darkMode 
               ? 'hover:bg-white/10 text-gray-300 hover:text-white' 
@@ -77,8 +77,8 @@ export default function QuizFlashcardNotebookLM({ darkMode }) {
           }`}
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
-            <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl border-4 flex items-center justify-center shrink-0 bg-green-brand text-black shadow-[4px_4px_0px_0px_#000] ${darkMode ? 'border-white/30' : 'border-black'}`}>
-              <Sparkles size={32} />
+            <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl border-4 flex items-center justify-center shrink-0 bg-blue-brand text-white shadow-[4px_4px_0px_0px_#000] ${darkMode ? 'border-white/30' : 'border-black'}`}>
+              <FileQuestion size={32} />
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-heading font-black tracking-tight leading-tight">
               Membuat Bahan Belajar Berupa Quiz Dan Kartu Tanya Menggunakan <span className="notebook-sparkle">NotebookLM</span>
